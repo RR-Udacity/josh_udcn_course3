@@ -95,7 +95,12 @@ class LocationService:
         return location
 
     @staticmethod
+    def retrieve_all() -> List[Location]:
+        return db.session.query(Location).all()
+
+    @staticmethod
     def create(location: Dict) -> Location:
+        print("\n\n****Location in Create: {}*****\n\n".format(location))
         validation_results: Dict = LocationSchema().validate(location)
         if validation_results:
             logger.warning(f"Unexpected data format in payload: {validation_results}")

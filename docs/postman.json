@@ -1,0 +1,93 @@
+{
+	"info": {
+		"_postman_id": "e0db0a9b-c754-404f-843b-23dddbcbce9a",
+		"name": "udcn064_course2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "locations",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/locations",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"locations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "persons",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/persons",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"persons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "person",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/persons/{{person_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"persons",
+						"{{person_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "person_id",
+			"value": "6",
+			"type": "default"
+		},
+		{
+			"key": "url",
+			"value": "http://localhost:30001/api",
+			"type": "default"
+		}
+	]
+}

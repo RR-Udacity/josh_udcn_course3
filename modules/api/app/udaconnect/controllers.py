@@ -20,21 +20,38 @@ api = Namespace("UdaConnect", description="Connections via geolocation.")  # noq
 # TODO: This needs better exception handling
 
 
-@api.route("/locations")
-@api.route("/locations/<location_id>")
-@api.param("location_id", "Unique ID for a given Location", _in="query")
-class LocationResource(Resource):
-    @accepts(schema=LocationSchema)
-    @responds(schema=LocationSchema)
-    def post(self) -> Location:
-        request.get_json()
-        location: Location = LocationService.create(request.get_json())
-        return location
+@api.route("/locations", methods=["GET"])
+class LocationsResource(Resource):
+    @responds(schema=LocationSchema, many=True)
+    def get(self) -> List[Location]:
+        # TODO: call udaconnect-location via gRPC
+        # TODO: format gRPC response into proper json
+        locations: List[Location] = LocationService.retrieve_all()
+        return locations
 
+
+@api.route("/location/<location_id>", methods=["GET"])
+@api.param("location_id", "Unique ID for a given Location", _in="query", type="int")
+class LocationResources(Resource):
     @responds(schema=LocationSchema)
     def get(self, location_id) -> Location:
         location: Location = LocationService.retrieve(location_id)
         return location
+
+
+@api.route("/location", methods=["POST"])
+@api.param("person_id", "ID for Related Person", _in="query")
+@api.param("creation_time", "Time Location was Recorded", _in="query")
+@api.param("latitude", "Latitude of the Location", _in="query")
+@api.param("longitude", "Longitude of the location", _in="query")
+class LocationCreateResource(Resource):
+    @accepts(schema=LocationSchema)
+    @responds(schema=LocationSchema)
+    def post(self) -> Location:
+        print('\n\n****Request Json: {}****\n\n'.format(payload))
+        payload = request.get_json()
+        new_location: Location = LocationService.create(payload)
+        return new_location
 
 
 @api.route("/persons")

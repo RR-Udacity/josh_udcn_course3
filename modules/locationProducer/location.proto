@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+// The item storing location data
+message LocationItem {
+    int32 person_id = 2;
+    float longitude = 3;
+    float latitude = 4;
+}
+
+// Empty Item
+message Empty {}
+
+// List of Location Items 
+message LocationItemList {
+    repeated LocationItem locations = 1;
+}
+
+// Create service for new location items
+service LocationProcessor {
+    rpc Create(LocationItem) returns (LocationItem) {};
+}

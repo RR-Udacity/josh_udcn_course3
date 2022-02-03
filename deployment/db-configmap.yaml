@@ -1,6 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 data:
+  FLASK_ENV: "development"
   DB_USERNAME: "ct_admin"
   DB_NAME: "geoconnections"
   DB_HOST: "postgres"
